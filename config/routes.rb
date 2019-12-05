@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
 
   devise_for :users
-  root 'users#top'
+  root 'products#index'
   resources :users, only: [:show, :delete]
   resources :products, only: [:index, :show]
   resources :carts, only: [:create, :index, :delete]
