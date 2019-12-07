@@ -39,13 +39,6 @@ ActiveRecord::Schema.define(version: 2019_12_07_040840) do
     t.datetime "deleted_at"
   end
 
-  create_table "jenres", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "genre_name", null: false
-    t.datetime "deleted_at"
-  end
-
   create_table "order_products", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
