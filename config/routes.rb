@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :admins, only: [:top]
   resources :users, only: [:index, :show, :edit, :update, :delete]
   resources :products, only: [:new, :create, :index, :show, :edit, :update, :delete]
-  resources :jenres, only: [:index, :create, :update, :delete]
+  resources :genres, only: [:index, :create, :update, :delete]
   resources :orders, only: [:index, :show, :update]
   end
 
