@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
 
-  namespace :admin do
-  devise_for :admins, :controller => {
+  devise_for :admins, :controllers => {
+    sessions: 'admins/sessions',
+    passwords: 'admins/passwords',
+    registrations: 'admins/registrations'
    }
+  namespace :admin do
   resources :admins, only: [:top]
   resources :users, only: [:index, :show, :edit, :update, :delete]
   resources :products, only: [:new, :create, :index, :show, :edit, :update, :delete]
@@ -11,7 +14,11 @@ Rails.application.routes.draw do
   end
 
 
-  devise_for :users
+  devise_for :users, controllers: {
+    sessions: 'users/sessions',
+    passwords: 'users/passwords',
+    registrations: 'users/registrations'
+  }
   root 'products#index'
   resources :users, only: [:show, :delete]
   resources :products, only: [:index, :show]
