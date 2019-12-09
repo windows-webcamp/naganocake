@@ -1,0 +1,72 @@
+<h2>注文情報確認</h2>
+
+<table class="table table-hover table-inverse">
+      <thead>
+        <tr>
+          <th>商品名</th>
+          <th>単価(税込)</th>
+          <th>数量</th>
+          <th>小計</th>
+    　　</tr>
+ 　　 </thead>
+ <% form_for @order do |order| %>
+ <% @carts.each do |cart| %>
+  <tbody>
+      <tr>
+      	<td>
+      	 <!--  <%= attachment_image_tag book.user, :profile_image, :fill, 60, 60, class: "img-circle pull-left profile-thumb", fallback: "no_image.jpg"%> -->
+
+      	  <!-- カートから写真、名前 -->
+      	  <%= f.hidden_field :product_image, value:@user.cart.product_image %>
+      	   <%= f.hidden_field :product_name, value:@user.cart.product_name %>
+        </td>
+        <td>
+
+        <td>
+          <!-- カートから単価 -->
+           <%= f.hidden_field :price, value:@user.cart.price %>
+        </td>
+        <td>
+          <!-- 数量 -->
+           <%= f.hidden_field :number, value:@user.cart.number %>
+        </td>
+        <td>
+          <!-- カートから小計　sum?? -->
+        </td>
+
+      </tr>
+  </tbody>
+  <% end %>
+</table>
+
+
+
+
+
+<table class="table table-bordered">
+
+  <tr>
+    <th>送料</th>
+    <td>800</td>
+  </tr>
+
+  <tr>
+    <th>商品合計</th>
+    <!-- order_product subtotalの合計 -->
+    <td></td>
+  </tr>
+
+  <tr>
+    <th>請求合計</th>
+    <!-- 送料＋商品合計 -->
+    <td></td>
+  </tr>
+
+</table>
+
+<h3>支払方法</h3>
+
+<h3>お届け先</h3>
+
+
+<%= link_to "購入を確定する", finish_path %>

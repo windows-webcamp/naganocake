@@ -23,7 +23,10 @@ Rails.application.routes.draw do
   resources :users, only: [:show, :delete]
   resources :products, only: [:index, :show]
   resources :carts, only: [:create, :index, :delete]
-  resources :orders, only: [:new, :check, :finish, :create, :index, :show]
+  resources :orders, only: [:new, :create, :index, :show]
   resources :sends, only: [:edit, :index, :delete, :update, :create]
+
+  get 'check' => 'orders#check'
+  get 'finish' => 'orders#finish'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

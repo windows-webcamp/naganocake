@@ -1,0 +1,32 @@
+<h3>購入情報入力</h3>
+
+<h3><strong>支払方法</strong></h3>
+
+<%= form_for(@order, {:url => orders_path}) do |f| %>
+
+<label>
+<%= f.radio_button :payment_method, "1" %> クレジットカード </label><br>
+
+<label><%= f.radio_button :payment_method, "2" %> 銀行振込</label>
+
+<% end %>
+
+<h3><strong>お届け先</strong></h3>
+
+<!-- ラジオボタンタグ？自分の、登録済の -->
+
+
+<%= form_for(@order, {:url => orders_path}) do |f| %>
+<strong>郵便番号</strong>
+<%= f.text_field :postcode %>ハイフンなし<br>
+
+<strong>住所</strong>
+
+<%= f.text_field :address %><br>
+
+<strong>宛名</strong>
+
+<%= f.text_field :name %><br>
+<%= f.submit "確認画面へ進む" %>
+
+<% end %>
