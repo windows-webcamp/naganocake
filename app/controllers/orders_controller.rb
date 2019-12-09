@@ -19,6 +19,7 @@ class OrdersController < ApplicationController
 
 # 注文情報を保存
     def create
+
     end
 
 # 注文履歴一覧ページ
