@@ -1,0 +1,8 @@
+ショッピングカート
+
+<% @carts.each do |cart| %>
+<div><%= cart.product.product_name %></div>
+<div><%= cart.product.price %></div>
+<div><%= cart.number %></div>
+
+<% end %>
