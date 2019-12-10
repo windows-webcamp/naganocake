@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2019_12_09_075708) do
+=======
+ActiveRecord::Schema.define(version: 2019_12_09_023810) do
+>>>>>>> master
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -37,6 +41,7 @@ ActiveRecord::Schema.define(version: 2019_12_09_075708) do
     t.datetime "updated_at", null: false
     t.string "genre_name", null: false
     t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_genres_on_deleted_at"
   end
 
   create_table "jenres", force: :cascade do |t|
@@ -54,6 +59,7 @@ ActiveRecord::Schema.define(version: 2019_12_09_075708) do
     t.integer "number", null: false
     t.integer "subtotal_price", null: false
     t.integer "make_status", null: false
+    t.integer "payment_method"
   end
 
   create_table "orders", force: :cascade do |t|

@@ -1,0 +1,11 @@
+商品一覧画面
+
+<% @products.each do |product| %>
+
+<%= product.id %>
+<%= product.product_name %>
+<%= product.price %>
+<%= product.genre.genre_name %>
+<%= product.sale_status %>
+
+<% end %>

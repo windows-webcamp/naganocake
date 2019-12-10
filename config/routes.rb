@@ -6,11 +6,15 @@ Rails.application.routes.draw do
     registrations: 'admins/registrations'
    }
   namespace :admin do
-  resources :admins, only: [:top]
-  resources :users, only: [:index, :show, :edit, :update, :delete]
-  resources :products, only: [:new, :create, :index, :show, :edit, :update, :delete]
-  resources :genres, only: [:index, :create, :update, :delete]
-  resources :orders, only: [:index, :show, :update]
+    resources :admins, only: [:top]
+    resources :users, only: [:index, :show, :edit, :update, :delete]
+    resources :products, only: [:new, :create, :index, :show, :edit, :update, :delete]
+    resources :genres, only: [:index, :create, :update, :destroy, :edit] do
+    member do
+    patch 'genre_restore'
+    end
+    end
+    resources :orders, only: [:index, :show, :update]
   end
 
 
