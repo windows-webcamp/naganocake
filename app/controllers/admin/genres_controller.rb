@@ -23,12 +23,18 @@ class Admin::GenresController < ApplicationController
 
   def destroy
     	@genre = Genre.find(params[:id])
+      @products = @genre.products
+      @products.destroy_all
     	@genre.destroy
     	redirect_to admin_genres_path
   end
 
   def genre_restore
       @genre =  Genre.only_deleted.find(params[:id]).restore
+      @products =  Product.only_deleted.where(genre_id: @genre.id)
+      @products.each do |product|
+        product.restore
+      end
       redirect_to admin_genres_path
   end
 

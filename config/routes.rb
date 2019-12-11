@@ -26,7 +26,10 @@ Rails.application.routes.draw do
   root 'products#index'
   resources :users, only: [:show, :delete]
   resources :products, only: [:index, :show]
-  resources :carts, only: [:create, :index, :delete]
+  resources :carts, only: [:create, :index, :destroy, :update]
+
+  delete '/carts_delete' => 'carts#carts_delete' ,as: 'carts_delete'
+
   resources :orders, only: [:new, :create, :index, :show]
   resources :sends, only: [:edit, :index, :delete, :update, :create]
   get 'check' => 'orders#check'

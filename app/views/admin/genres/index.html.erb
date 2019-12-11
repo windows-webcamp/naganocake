@@ -12,13 +12,14 @@
 <%= genre.genre_name %>
 
 <% unless genre.deleted_at? %>
+
 <%= link_to "無効にする", admin_genre_path(genre), data: { confirm: "無効にしますか?" }, method: :delete %></td>
 <%= link_to "編集", edit_admin_genre_path(genre) %>
+
 <% else %>
 <%= link_to "有効にする", genre_restore_admin_genre_path(genre), method: :patch %></td>
 <%= link_to "編集", edit_admin_genre_path(genre) %>
-<% end %>
 
 <% end %>
 
-
+<% end %>
