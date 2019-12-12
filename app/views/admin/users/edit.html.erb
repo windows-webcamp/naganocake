@@ -1,0 +1,38 @@
+<h2>会員編集</h2>
+
+<% form_for @user, url: =>{ :controller => :admin/users, :action => :update } do |g| %>
+	<div class="field">
+		<%= g.label :会員ID %>
+		<%= @user.id %>
+	</div>
+	<div class="field">
+		<%= g.label :氏名 %>
+		<%= g.text_field :last_name, autofocus: true %>
+		<%= g.text_field :first_name, autofocus: true %>
+	</div>
+	<div class="field">
+		<%= g.label :カナ %>
+		<%= g.text_field :last_name_kana, autofocus: true %>
+		<%= g.text_field :first_name_kana, autofocus: true %>
+	</div>
+	<div class="field">
+		<%= g.label :郵便番号 %>
+		<%= g.text_field :postcode,autofocus: true %>
+	</div>
+	<div class="field">
+		<%= g.label :住所 %>
+		<%= g.text_field :address,autofocus: true %>
+	</div>
+	<div class="field">
+		<%= g.label :電話番号 %>
+		<%= g.text_field :phone_number,autofocus: true %>
+	</div>
+	<div class="field">
+		<%= g.label :メールアドレス %>
+		<%= g.email_field :email, autofocus: true, autocomplete: "email" %>
+	</div>
+
+<!--%= link_to "退会済にする",method::deleted_at, => "本当に退会させますか？"%-->
+<%= g.submit "変更を保存する" %>
+
+<% end %>
