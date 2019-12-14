@@ -1,8 +1,25 @@
 ジャンル管理画面
 
-          <%= form_for(@genre) do |f| %>
-          <h4>ジャンル</h4>
-          <%= f.text_field :genre_name,:style=> "width:80%;" %>
-          <%= f.submit '追加', class: "btn btn-primary margin1",:style=> "width:80%;" %>
-          </div>
-          <% end %>
+<h4>ジャンル</h4>
+<%= form_for(@genre, {:url => admin_genres_path}) do |f| %>
+<%= f.text_field :genre_name, :style=> "width:80%;" %>
+<%= f.submit '追加', class: "btn btn-primary margin1",:style=> "width:80%;" %>
+<% end %>
+
+ジャンル一覧
+<% @genres.each do |genre| %>
+
+<%= genre.genre_name %>
+
+<% unless genre.deleted_at? %>
+
+<%= link_to "無効にする", admin_genre_path(genre), data: { confirm: "無効にしますか?" }, method: :delete %></td>
+<%= link_to "編集", edit_admin_genre_path(genre) %>
+
+<% else %>
+<%= link_to "有効にする", genre_restore_admin_genre_path(genre), method: :patch %></td>
+<%= link_to "編集", edit_admin_genre_path(genre) %>
+
+<% end %>
+
+<% end %>
