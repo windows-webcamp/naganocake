@@ -16,27 +16,34 @@
   <tbody>
       <tr>
         <td>
-          <%= order.created_at %>
+          <%= order.created_at.strftime('%Y/%m/%d') %>
         </td>
 <!-- 配送先 -->
         <td>
-
+          <%= order.postcode %><br>
+          <%= order.address %><br>
+          <%= order.name %>
         </td>
 
 <!-- 注文商品 -->
+<% order.order_products.each do |order_product| %>
         <td>
+          <%= order_product.product.product_name %>
         </td>
-
+<% end %>
 <!-- 支払金額 -->
-        <td></td>
+        <td>
+          <%= order.total_price %>
+        </td>
 
 <!-- 履歴詳細へのリンク -->
         <td>
-          <%= link_to '表示する', finish_path, class: 'btn-sm btn-success' %>
+          <%= link_to '表示する', order_path(order.id), class: 'btn-sm btn-success' %>
         </td>
 
       </tr>
   </tbody>
+
   <% end %>
 
 </table>

@@ -1,23 +1,26 @@
-<h3>購入情報入力</h3>
-<<<<<<< HEAD
+<h2>購入情報入力</h2>
 
-<h3><strong>支払方法</strong></h3>
+<h3>支払方法</h3>
 
-<%= form_for(@order, {:url => orders_path}) do |f| %>
+<%= form_for(@order, {:url => check_orders_path}) do |f| %>
 
-<label>
-<%= f.radio_button :payment_method, "1" %> クレジットカード </label><br>
+<label><%= f.radio_button :payment_method, :クレジットカード %> クレジットカード </label><br>
 
-<label><%= f.radio_button :payment_method, "2" %> 銀行振込</label>
+<label><%= f.radio_button :payment_method, :銀行振込 %> 銀行振込</label>
 
-<% end %>
+
 
 <h3><strong>お届け先</strong></h3>
 
-<!-- ラジオボタンタグ？自分の、登録済の -->
+<label><%= radio_button_tag :add, 1 %> ご自身の住所 </label><br>
+<%= current_user.postcode %>
+<%= current_user.last_name %>
+<%= current_user.first_name %><br>
 
+<label><%= radio_button_tag :add, 2 %> 登録済住所から選択</label><br>
 
-<%= form_for(@order, {:url => orders_path}) do |f| %>
+<label><%= radio_button_tag :add, 3 %> 新しいお届け先</label><br>
+
 <strong>郵便番号</strong>
 <%= f.text_field :postcode %>ハイフンなし<br>
 
@@ -28,24 +31,9 @@
 <strong>宛名</strong>
 
 <%= f.text_field :name %><br>
+
+
 <%= f.submit "確認画面へ進む" %>
 
-=======
-<h3><strong>支払方法</strong></h3>
-<%= form_for(@order_product, {:url => orders_path}) do |f| %>
-<label>
-<%= f.radio_button :payment_method, "1" %> クレジットカード </label><br>
-<label><%= f.radio_button :payment_method, "2" %> 銀行振込</label>
 <% end %>
-<h3><strong>お届け先</strong></h3>
-<!-- ラジオボタンタグ？自分の、登録済の -->
-<%= form_for(@order, {:url => orders_path}) do |f| %>
-<strong>郵便番号</strong>
-<%= f.text_field :postcode %>ハイフンなし<br>
-<strong>住所</strong>
-<%= f.text_field :address %><br>
-<strong>宛名</strong>
-<%= f.text_field :name %><br>
-<%= f.submit "確認画面へ進む" %>
->>>>>>> master
-<% end %>
+

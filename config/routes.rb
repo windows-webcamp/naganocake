@@ -10,9 +10,9 @@ Rails.application.routes.draw do
     resources :users, only: [:index, :show, :edit, :update, :delete]
     resources :products, only: [:new, :create, :index, :show, :edit, :update, :delete]
     resources :genres, only: [:index, :create, :update, :destroy, :edit] do
-    member do
-    patch 'genre_restore'
-    end
+      member do
+        patch 'genre_restore'
+      end
     end
     resources :orders, only: [:index, :show, :update]
   end
@@ -26,11 +26,20 @@ Rails.application.routes.draw do
   root 'products#index'
   resources :users, only: [:show, :delete]
   resources :products, only: [:index, :show]
-  resources :carts, only: [:create, :index, :delete]
-  resources :orders, only: [:new, :create, :index, :show]
-  resources :sends, only: [:edit, :index, :delete, :update, :create]
+  resources :carts, only: [:create, :index, :destroy, :update]
+  delete '/carts_delete' => 'carts#carts_delete' ,as: 'carts_delete'
+  resources :orders, only: [:new, :create, :index, :show] do
+    collection do
+      # get 'check' => 'orders#check'
+      post 'check'
+      get 'finish'
+    end
+  end
+  get '/orders_check' => 'orders#check',as: 'orders_check'
 
-  get 'check' => 'orders#check'
-  get 'finish' => 'orders#finish'
+  resources :sends, only: [:edit, :index, :delete, :update, :create]
+    # post 'orders/check' => 'orders#check'
+    # get 'orders/check' => 'orders#check'
+    # get 'finish' => 'orders#finish'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

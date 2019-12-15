@@ -10,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2019_12_09_075708) do
-=======
-ActiveRecord::Schema.define(version: 2019_12_09_023810) do
->>>>>>> master
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -44,13 +40,6 @@ ActiveRecord::Schema.define(version: 2019_12_09_023810) do
     t.index ["deleted_at"], name: "index_genres_on_deleted_at"
   end
 
-  create_table "jenres", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "genre_name", null: false
-    t.datetime "deleted_at"
-  end
-
   create_table "order_products", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -58,8 +47,7 @@ ActiveRecord::Schema.define(version: 2019_12_09_023810) do
     t.integer "product_id", null: false
     t.integer "number", null: false
     t.integer "subtotal_price", null: false
-    t.integer "make_status", null: false
-    t.integer "payment_method"
+    t.integer "make_status", default: 1, null: false
   end
 
   create_table "orders", force: :cascade do |t|
@@ -69,9 +57,9 @@ ActiveRecord::Schema.define(version: 2019_12_09_023810) do
     t.string "name", null: false
     t.string "postcode", null: false
     t.string "address", null: false
-    t.integer "delivery_cost", null: false
+    t.integer "delivery_cost", default: 800, null: false
     t.integer "total_price", null: false
-    t.integer "order_status", null: false
+    t.integer "order_status", default: 1, null: false
     t.integer "payment_method"
   end
 
