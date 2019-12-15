@@ -10,6 +10,51 @@
   </head>
 
   <body>
+    <header>
+      <nav class="navbar navbar-default naavbar-inverse">
+        <div class="container">
+          <nav class="nav navbar-nav nav navbar-left">
+            <span>ながのCAKE</span>
+          </nav>
+          <% if user_signed_in? %>
+          <nav>
+            <ul class="nav navbar-nav navbar-right">
+              <%= link_to "商品一覧", products_path %>
+              <%= "user_name" %>
+              <%= link_to "ログアウト", destroy_user_session_path %>
+            </ul>
+          </nav>
+          <% elsif admin? %>
+          <nav>
+            <ul class="nav navbar-nav navbar-right">
+              <%= link_to "商品一覧", admin_products_path %>
+              <%= link_to "会員一覧", admin_users_path %>
+              <%= link_to "注文履歴一覧", admin_orders_path %>
+              <%= link_to "ジャンル管理", admin_genres_path %>
+            </ul>
+          </nav>
+          <% else %>
+          <nav>
+            <ul class="nav navbar-nav navbar-right">
+              <%= link_to "新規登録", new_user_registration_path %>
+              <%= link_to "ログイン", new_user_session_path %>
+            </ul>
+          </nav>
+          <% end %>
+        </div>
+      </nav>
+    </header>
     <%= yield %>
   </body>
+  <footer>
+    <div class="container">
+      <div class="row">
+        <nav class="navbar-right">
+          <p>
+            Creator windows
+          </p>
+        </nav>
+      </div>
+    </div>
+  </footer>
 </html>
