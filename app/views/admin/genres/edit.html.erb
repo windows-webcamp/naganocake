@@ -1,0 +1,5 @@
+<h1>編集</h1>
+<%= form_for(@genre, {:url => admin_genre_path}) do |f| %>
+<%= f.text_field :genre_name %>
+<%= f.submit '編集する', :style=> "width:80%;", class: "margin-top btn btn-primary" %>
+<% end %>

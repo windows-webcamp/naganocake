@@ -1,0 +1,23 @@
+商品新規登録画面
+
+<%= form_for(@product, {:url => admin_products_path}) do |f| %>
+
+<p>商品画像</p>
+<%= f.attachment_field :product_image %>
+
+<p>商品名</p>
+<%= f.text_field :product_name, autofocus: true, class:"form-control", id:"inputproductname" %>
+
+<p>商品説明文</p>
+<%= f.text_area :product_intoroduction, autofocus: true, class:"form-control", id:"inputproductintoroduction" %>
+
+<p>税抜き価格</p>
+<%= f.text_field :price, autofocus: true, class:"form-control", id:"inputprice" %>
+
+<%= f.collection_select :genre_id, Genre.all, :id, :genre_name %>
+
+<%= f.select :sale_status, Product.sale_statuses.keys.to_a, {} %>
+
+<%= f.submit "新規登録" %>
+
+<% end %>
