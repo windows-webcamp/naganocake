@@ -1,52 +1,84 @@
 <!-- あどみん -->
 <h2>注文詳細画面</h2>
-
-<!-- <%= form_for(@order) do |f| %> -->
-
+<%= form_for(@order, {:url => admin_order_path}) do |f| %>
 <table>
   <tr>
-    <th>購入者</th><td><%= @user.first_name %><%= @user.last_name %></td>
+    <th>購入者</th>
+    <td>
+      <%= link_to @user.last_name + @user.first_name, admin_user_path(@user.id) %>
+    </td>
   </tr>
-
   <tr>
-    <th>配送先</th><td>19</td>
+    <th>配送先</th>
+    <td>
+      <% f.hidden_field :postcode, value:@order.postcode %>
+      <% f.hidden_field :address, value:@order.address %>
+      <% f.hidden_field :name, value:@order.name %>
+      <%= @order.postcode %>
+      <%= @order.address %>
+      <br>
+      <%= @order.name %>
+    </td>
   </tr>
-
   <tr>
-    <th>支払方法</th><td><%= @order.payment_method %></td>
+    <th>支払方法</th>
+    <td>
+      <% f.hidden_field :payment_method, value:@order.payment_method %>
+      <%= @order.payment_method %>
+    </td>
   </tr>
-
   <tr>
     <th>注文ステータス</th>
-    <!-- <td><%= f.select :order_status, Order.order_status.keys.to_a, {}  %> -->
-</td>
+    <td>
+      <%= f.select :order_status, Order.order_statuses.keys.to_a, {} %>
+      <!-- <%= @order.order_status %> -->
+      <%= f.submit "更新" %>
+    </td>
   </tr>
 </table>
-
-
 <table>
   <tr>
-    <th>商品名</th> <th>単価（税込み）</th> <th>数量</th> <th>製作ステータス</th>
+    <th>商品名</th>
+    <th>単価（税込み）</th>
+    <th>数量</th>
+    <th>製作ステータス</th>
   </tr>
-
+  <%= f.fields_for :order_products do |t| %>
   <tr>
-    <td>さとう</td> <td>19</td> <td>A型</td>
+    <td>
+      <%= t.object.product.product_name %>
+    </td>
+    <td>
+      <%= (t.object.product.price*1.1).round %>
+    </td>
+    <td>
+      <%= t.object.number %>
+    </td>
+    <td>
+      <%= t.select :make_status, OrderProduct.make_statuses.keys.to_a, {} %>
+    </td>
   </tr>
+  <% end %>
 </table>
-
-
 <table>
   <tr>
-    <th>商品合計</th><td>さとう</td>
+    <th>商品合計</th>
+    <td>
+      <%= @order.total_price - @order.delivery_cost %>
+    </td>
   </tr>
-
   <tr>
-    <th>送料</th><td>800</td>
+    <th>送料</th>
+    <td>
+      <%= f.hidden_field :delivery_cost, value:800 %>800 
+    </td>
   </tr>
-
   <tr>
-    <th>請求金額合計</th><td><%= @order.total_price %></td>
+    <th>請求金額合計</th>
+    <td>
+      <% f.hidden_field :total_price, value:@order.total_price %>
+      <%= @order.total_price %>
+    </td>
   </tr>
 </table>
-
 <% end %>

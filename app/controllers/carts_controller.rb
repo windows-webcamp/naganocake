@@ -1,23 +1,27 @@
 class CartsController < ApplicationController
+
 def index
 	@carts = current_user.carts
-	# @sum = cart.product.price * cart.number
 end
+
 def create
 	@cart = Cart.new(cart_params)
 	@cart.save
 	redirect_to carts_path
 end
+
 def update
-    cart = current_user.carts
-    cart.update(cart_params)
+    @cart = Cart.find(params[:id])
+    @cart.update(cart_params)
     redirect_to carts_path
 end
+
 def destroy
     @cart = Cart.find(params[:id])
     @cart.destroy
     redirect_to carts_path
 end
+
 def carts_delete
     # @carts = current_user.carts
     # @carts.delete_all

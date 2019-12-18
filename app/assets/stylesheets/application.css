@@ -16,3 +16,10 @@
 
  @import "bootstrap-sprockets";
  @import "bootstrap";
+
+ .td {
+ 	display: block;
+ }
+.table {
+	table-layout: fixed;
+}

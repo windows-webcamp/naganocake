@@ -1,0 +1,23 @@
+<h2>会員一覧</h2>
+<table>
+	<thead>
+		<tr>
+			<th>顧客ID</th>
+			<th>氏名</th>
+			<th>メールアドレス</th>
+			<th>ステータス</th>
+			<th colspan="4"></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<% @users.each do |u| %>
+			<td><%= u.id %></td>
+			<td><%= link_to u.last_name, admin_user_path(u.id) %><%= u.first_name %></td>
+			<td><%= u.email %></td>
+			<td></td>
+			<% end %>
+		</tr>
+	</tbody>
+</table>
+	

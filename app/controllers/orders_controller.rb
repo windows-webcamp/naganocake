@@ -5,6 +5,7 @@ class OrdersController < ApplicationController
     def new
     	@order = Order.new
       # @user = current_user
+        @sends = Send.all
     end
 
 # 注文確認ページ
@@ -13,6 +14,17 @@ class OrdersController < ApplicationController
         # @order = Order.new
         @carts = current_user.carts
 
+        if params[:add] == "my_addr"
+            @order.postcode = current_user.postcode
+            @order.address = current_user.address
+            @order.name = current_user.last_name + current_user.first_name
+        elsif params[:add] == "send_addr"
+            @send = Send.find(params[:send][:send_id])
+            pp @send
+            @order.postcode = @send.postcode
+            @order.address = @send.address
+            @order.name = @send.name
+        end
     end
 
 # 注文完了ページ
@@ -43,7 +55,8 @@ class OrdersController < ApplicationController
 # 注文履歴一覧ページ
     def index
         @user = current_user
-        @orders = Order.all
+        @orders = @user.orders.order(created_at: :desc)
+        # @orders = Order.page(params[:page]).reverse_order
     end
 
 # 注文履歴詳細ページ

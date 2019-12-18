@@ -36,7 +36,6 @@ Rails.application.routes.draw do
     end
   end
   get '/orders_check' => 'orders#check',as: 'orders_check'
-
   resources :sends, only: [:edit, :index, :delete, :update, :create]
     # post 'orders/check' => 'orders#check'
     # get 'orders/check' => 'orders#check'

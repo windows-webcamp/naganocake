@@ -1,0 +1,35 @@
+<h2>配送先登録/一覧</h2>
+<%= form_for(@send) do |f| %>
+<h4>郵便番号</h4>
+<%= f.text_field :postcode %>
+<h4>住所</h4>
+<%= f.text_area :address %>
+<h4>宛名</h4>
+<%= f.text_field :name %>
+
+<%= f.submit '登録する' %>
+<% end %>
+
+<table>
+	<thead>
+		<tr>
+			<th>郵便番号</th>
+			<th>住所</th>
+			<th>宛名</th>
+			<th></th>
+			<th colspan="4"></th>
+		</tr>
+	</thead>
+	<tbody>
+	    <% @sends.each do |send| %>
+		<tr>
+			<td><%= send.postcode %></td>
+			<td><%= send.address %></td>
+			<td><%= send.name %></td>
+			<td><%= link_to "編集する", edit_send_path(send.id) %>
+
+			</td>
+		</tr>
+		<% end %>
+	</tbody>
+</table>
