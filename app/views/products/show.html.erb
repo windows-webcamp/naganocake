@@ -1,19 +1,66 @@
-商品詳細画面
-
-<!-- 商品詳細 -->
-<%= attachment_image_tag @product, :product_image, format: 'jpeg', fallback: "no_image.jpg", size: "100x100" %>
-<%= @product.product_name %>
-<%= @product.product_intoroduction %>
-<%= (@product.price * 1.1).round %>円
-
-
-<!-- カートに保存 -->
-<%= form_for(@cart) do |f| %>
-
-<%= f.hidden_field :product_id, value: @product.id %>
-<%= f.hidden_field :user_id, value: current_user.id %>
-<%= f.select :number, [1,2,3,4,5,6,7,8,9,10] %>
-
-<%= f.submit "カートに入れる" %>
-
-<% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="row">
+        <div class="col-xs-1"></div>
+        <div class="col-xs-10">
+          <nav>
+            <ul class="nav-list">
+              <% if user_signed_in? %>
+              <span class="margin-right"><%= link_to "マイページ", user_path(current_user) %></span>
+              <span class="margin-right"><%= link_to "カート", carts_path(current_user) %></span>
+              <span class="margin-right"><%= link_to "商品一覧", root_path %></span>
+              <span class="margin-right"><%= link_to "注文履歴", orders_path(current_user) %></span>
+              <% else %>
+              <% end %>
+            </ul>
+          </nav>
+        </div>
+        <div class="col-xs-1"></div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <td colspan="3" class="fontsize">ジャンル検索</td>
+              </tr>
+            </thead>
+            <tbody>
+              <% @genres.each do |genre| %>
+                <tr>
+                  <td>
+                    <%= link_to genres_path(genre.id) do %>
+                      <%= genre.genre_name %>
+                        <% end %>
+                  </td>
+                </tr>
+                <% end %>
+            </tbody>
+          </table>
+        </div>
+        <div class="col-xs-6">
+          <!-- 商品詳細 -->
+          <%= attachment_image_tag @product, :product_image, format: 'jpeg', fallback: "no_image.jpg", size: "500x350" %>
+        </div>
+        <div class="col-xs-4">
+          <p class="fontsize">
+            <%= @product.product_name %>
+          </p>
+          <p>
+            <%= @product.product_intoroduction %>
+          </p>
+          <p>￥
+            <%= (@product.price * 1.1).round %>円 (税込み)</p>
+          <!-- カートに保存 -->
+          <%= form_for @cart, html:{ class: "form-inline"} do |f| %>
+            <%= f.hidden_field :product_id, value: @product.id %>
+              <%= f.hidden_field :user_id, value: current_user.id %>
+                <%= f.select :number, [1,2,3,4,5,6,7,8,9,10],{}, class: "form-control" %>
+                  <%= f.submit "カートに入れる", class: "btn btn-primary" %>
+                    <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -3,7 +3,7 @@ class OrdersController < ApplicationController
 
 # 注文情報入力ページorder_productモデル
     def new
-    	@order = Order.new
+        @order = Order.new
         @sends = Send.all
     end
 
@@ -11,7 +11,6 @@ class OrdersController < ApplicationController
     def check
         @order = Order.new(order_params)
         @carts = current_user.carts
-
         if params[:add] == "my_addr"
             @order.postcode = current_user.postcode
             @order.address = current_user.address
@@ -34,7 +33,6 @@ class OrdersController < ApplicationController
         @order = Order.new(order_params)
         @order.user_id = current_user.id
         @order.save
-
         @carts = current_user.carts
         @carts.each do |cart|
             @order_product = OrderProduct.new
@@ -43,7 +41,6 @@ class OrdersController < ApplicationController
             @order_product.order_id = @order.id
             @order_product.product_id = cart.product_id
             @order_product.save
-
         end
         current_user.carts.destroy_all
         pp @order.errors.full_messages
@@ -67,4 +64,3 @@ private
         params.require(:order).permit(:payment_method, :postcode, :address, :name, :user_id, :delivery_cost, :total_price, :order_status)
     end
 end
-
