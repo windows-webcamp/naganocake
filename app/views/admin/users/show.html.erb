@@ -1,34 +1,75 @@
-<h2>マイページ</h2>
-<ul class="nav navbar-nav navbar-right">
-	<%= "登録情報" %>
-	<%= link_to "編集する", edit_user_registration_path %>
-	<%= link_to "パスワードを変更する", edit_user_password_path %>
-</ul>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="row">
+        <div class="col-xs-1"> </div>
+        <div class="col-xs-10">
+          <nav>
+            <ul class="nav-list">
+              <% if user_signed_in? %>
+              <span class="margin-right"><%= link_to "マイページ", user_path(current_user) %></span>
+              <span class="margin-right"><%= link_to "カート", carts_path(current_user) %></span>
+              <span class="margin-right"><%= link_to "商品一覧", root_path %></span>
+              <span class="margin-right"><%= link_to "注文履歴", orders_path(current_user) %></span>
+              <% else %>
+              <% end %>
+            </ul>
+          </nav>
+        </div>
+        <div class="col-xs-1"> </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-1"> </div>
+        <div class="col-xs-6"> <span class="fontsize-cart">会員詳細
+</span> <br><br>
+
 <table>
-	<tr>
-		<td>氏名</td><td><%= @user.user.last_name %><%= @user.user.first_name %></td>
-	</tr>
-	<tr>
-		<td>カナ</td><td><%= @user.last_name_kana %><%= @user.first_name_kana %></td>
-	</tr>
-	<tr>
-		<td>郵便番号</td><td><%= @user.postcode %></td>
-	</tr>
-	<tr>
-		<td>住所</td><td><%= @user.address %></td>
-	</tr>
-	<tr>
-		<td>電話番号</td><td><%= @user.phone_number %></td>
-	</tr>
-	<tr>
-		<td>メールアドレス</td><td><%= @user.email %></td>
-	</tr>
+  <tr>
+  <th><%= "顧客ID" %></th>
+  <td><%= @user.id %></td>
+  </tr>
+
+    <% unless @users.deleted_at? %>
+  <%= "有効会員" %>
+  <% else %>
+  <%= "退会済" %>
+  <% end %>
+  
+  <tr>
+   <th><%= "氏名" %></th>
+  <td><%= @user.last_name %><%= @user.first_name %></td>
+  </tr>
+  <tr>
+  <th><%= "フリガナ" %></th>
+  <td><%= @user.last_name_kana %><%= @user.first_name_kana %></td>
+  </tr>
+  <tr>
+  <th><%= "郵便番号" %></th>
+  <td><%= @user.postcode %></td>
+  </tr>
+   <tr>
+  <th><%= "住所" %></th>
+  <td><%= @user.address %></td>
+  </tr>
+  <tr>
+  <th><%= "電話番号" %></th>
+  <td><%= @user.phone_number %></td>
+  </tr>
+  <tr>
+  <th><%= "メールアドレス" %>　　</th>
+  <td><%= @user.email %></td>
+  </tr>
 </table>
-<ul class="nav navbar-nav navbar-right">
-	<strong>配送先</strong>
-	<%= link_to "一覧を見る", sends_path %>
-</ul>
-<ul class="nav navbar-nav navbar-right">
-	<strong>注文履歴</strong>
-	<%= link_to "一覧を見る", orders_path %>
-</ul>
+
+<br>
+
+<div style="text-align : left">
+<%= link_to "編集する", edit_admin_user_path(@user.id), class: "btn btn-primary" %>
+<%= link_to "注文履歴一覧を見る", admin_orders_path, class: "btn btn-primary" %>
+</div>
+
+        <div class="col-xs-4"> </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,70 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="row">
+        <div class="col-xs-1"> </div>
+        <div class="col-xs-10">
+          <nav>
+            <ul class="nav-list">
+              <% if user_signed_in? %>
+              <span class="margin-right"><%= link_to "マイページ", user_path(current_user) %></span>
+              <span class="margin-right"><%= link_to "カート", carts_path(current_user) %></span>
+              <span class="margin-right"><%= link_to "商品一覧", root_path %></span>
+              <span class="margin-right"><%= link_to "注文履歴", orders_path(current_user) %></span>
+              <% else %>
+              <% end %>
+            </ul>
+          </nav>
+        </div>
+        <div class="col-xs-1"> </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-1"> </div>
+        <div class="col-xs-6"> <span class="fontsize-cart">新規登録
+</span> <br><br>
+
+
+
+
+<%= form_for(@user, {:url => admin_user_path}) do |g| %>
+	<div class="field">
+		<%= g.label :会員ID %>
+		<%= @user.id %>
+	</div>
+	<div class="field">
+		<%= g.label :氏名 %>
+		<%= g.text_field :last_name, autofocus: true %>
+		<%= g.text_field :first_name, autofocus: true %>
+	</div>
+	<div class="field">
+		<%= g.label :カナ %>
+		<%= g.text_field :last_name_kana, autofocus: true %>
+		<%= g.text_field :first_name_kana, autofocus: true %>
+	</div>
+	<div class="field">
+		<%= g.label :郵便番号 %>
+		<%= g.text_field :postcode,autofocus: true %>
+	</div>
+	<div class="field">
+		<%= g.label :住所 %>
+		<%= g.text_field :address,autofocus: true %>
+	</div>
+	<div class="field">
+		<%= g.label :電話番号 %>
+		<%= g.text_field :phone_number,autofocus: true %>
+	</div>
+	<div class="field">
+		<%= g.label :メールアドレス %>
+		<%= g.email_field :email, autofocus: true, autocomplete: "email" %>
+	</div>
+<%= link_to "退会済にする", admin_user_path(@user), data: { confirm: "退会しますか？" }, method: :delete %>
+<%= g.submit "変更を保存する" %>
+<% end %>
+
+
+        </div>
+        <div class="col-xs-4"> </div>
+      </div>
+    </div>
+  </div>
+</div>

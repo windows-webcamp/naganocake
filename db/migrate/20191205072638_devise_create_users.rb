@@ -41,11 +41,11 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
       t.string :postcode, null: false
       t.string :address, null: false
       t.string :phone_number, null: false
-      t.datetime :deleted_at, default: false
+      t.datetime :deleted_at
 
 
     end
-
+    add_index :users, :deleted_at
     add_index :users, :email,                unique: true
     add_index :users, :reset_password_token, unique: true
     # add_index :users, :confirmation_token,   unique: true

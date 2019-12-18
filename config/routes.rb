@@ -6,8 +6,7 @@ Rails.application.routes.draw do
     registrations: 'admins/registrations'
    }
   namespace :admin do
-    resources :admins, only: [:top]
-    resources :users, only: [:index, :show, :edit, :update, :delete]
+    resources :users, only: [:index, :show, :edit, :update, :destroy]
     resources :products, only: [:new, :create, :index, :show, :edit, :update, :delete]
     resources :genres, only: [:index, :create, :update, :destroy, :edit] do
     member do
@@ -15,6 +14,7 @@ Rails.application.routes.draw do
     end
     end
     resources :orders, only: [:index, :show, :update]
+    get 'top' => 'admins#top'
   end
 
 
@@ -24,15 +24,20 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
   root 'products#index'
-  resources :users, only: [:show, :delete]
+  get '/products/:genre_id/genre', to:'products#index', as: 'genres'
+  resources :users, only: [:show, :destroy]
   resources :products, only: [:index, :show]
   resources :carts, only: [:create, :index, :destroy, :update]
 
   delete '/carts_delete' => 'carts#carts_delete' ,as: 'carts_delete'
 
-  resources :orders, only: [:new, :create, :index, :show]
+  resources :orders, only: [:new, :create, :index, :show] do
+    collection do
+      post 'check'
+      get 'finish'
+    end
+  end
+  get '/orders_check' => 'orders#check',as: 'orders_check'
   resources :sends, only: [:edit, :index, :delete, :update, :create]
-  get 'check' => 'orders#check'
-  get 'finish' => 'orders#finish'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

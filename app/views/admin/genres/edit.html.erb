@@ -1,5 +1,33 @@
-<h1>編集</h1>
-<%= form_for(@genre, {:url => admin_genre_path}) do |f| %>
-<%= f.text_field :genre_name %>
-<%= f.submit '編集する', :style=> "width:80%;", class: "margin-top btn btn-primary" %>
-<% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="row">
+        <div class="col-xs-1"> </div>
+        <div class="col-xs-10">
+          <nav>
+            <ul class="nav-list">
+              <% if user_signed_in? %>
+              <span class="margin-right"><%= link_to "マイページ", user_path(current_user) %></span>
+              <span class="margin-right"><%= link_to "カート", carts_path(current_user) %></span>
+              <span class="margin-right"><%= link_to "商品一覧", root_path %></span>
+              <span class="margin-right"><%= link_to "注文履歴", orders_path(current_user) %></span>
+              <% else %>
+              <% end %>
+            </ul>
+          </nav>
+        </div>
+        <div class="col-xs-1"> </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-1"> </div>
+        <div class="col-xs-10"> <span class="fontsize-cart">ジャンル編集画面</span> <br>
+          <%= form_for(@genre, {:url => admin_genre_path}) do |f| %> <br>
+            <%= f.text_field :genre_name %>
+              <%= f.submit '編集する', :style=> "width:10%;", class: "btn btn-primary" %>
+                <% end %>
+        </div>
+      </div>
+      <div class="col-xs-1"> </div>
+    </div>
+  </div>
+</div>

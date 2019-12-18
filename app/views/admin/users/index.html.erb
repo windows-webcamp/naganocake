@@ -1,0 +1,58 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="row">
+        <div class="col-xs-1"> </div>
+        <div class="col-xs-10">
+          <nav>
+            <ul class="nav-list">
+              <% if user_signed_in? %>
+              <span class="margin-right"><%= link_to "マイページ", user_path(current_user) %></span>
+              <span class="margin-right"><%= link_to "カート", carts_path(current_user) %></span>
+              <span class="margin-right"><%= link_to "商品一覧", root_path %></span>
+              <span class="margin-right"><%= link_to "注文履歴", orders_path(current_user) %></span>
+              <% else %>
+              <% end %>
+            </ul>
+          </nav>
+        </div>
+        <div class="col-xs-1"> </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-1"> </div>
+        <div class="col-xs-6"> <span class="fontsize-cart">会員一覧
+</span> <br><br>
+
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>顧客ID</th>
+			<th>氏名</th>
+			<th>メールアドレス</th>
+			<th>ステータス</th>
+			<th colspan="4"></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<% @users.each do |u| %>
+			<td><%= u.id %></td>
+			<td><%= link_to u.last_name, admin_user_path(u.id) %><%= u.first_name %></td>
+			<td><%= u.email %></td>
+			<td>       <% unless u.deleted_at? %>
+        <%= "有効会員" %>
+        <% else %>
+        <%= "退会済" %>
+        <% end %></td>
+			<% end %>
+		</tr>
+	</tbody>
+</table>
+
+
+</div>
+        <div class="col-xs-4"> </div>
+      </div>
+    </div>
+  </div>
+</div>

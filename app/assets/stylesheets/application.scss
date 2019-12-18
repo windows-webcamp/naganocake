@@ -1,0 +1,100 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+ @import "bootstrap-sprockets";
+ @import "bootstrap";
+
+body {
+  font-family: Meiryo;
+}
+
+header {
+  background-color: sandybrown;
+  width: 100%;
+  height: 70px;
+}
+
+.header-box {
+  width: 83%;
+  height: 70px;
+  line-height: 70px;
+  margin: 0 auto;
+}
+
+.title-box {
+  float: left;
+  height: 70px;
+  color: white;
+}
+
+.nav-box {
+  list-style: none;
+  float: right;
+  width: 50%;
+  height: 70px;
+}
+
+.navlist {
+  float: right;
+  margin: 10px;
+  line-height: 70px;
+  list-style: none;
+}
+
+.nav-list {
+  text-align: center;
+  padding: 10px 0;
+  margin: 20 auto;
+}
+
+.nav-list-item {
+  list-style: none;
+  display: inline-block;
+  margin: 0 20px;
+}
+
+.imagesize {
+width: 170px;
+height: 70px;
+}
+
+.fontsize {
+font-size: 15px;
+font-weight: bold;
+}
+
+.width {
+  margin: 20 auto;
+}
+
+.fontsize-cart{
+ font-size: 20px;
+}
+
+.right {
+ margin-left: auto;
+}
+
+.w-80px {
+  width: 100px !important;
+}
+
+.margin-right {
+ margin-right: 20px;
+}
+
+.color-white {
+ font-color: white;
+}

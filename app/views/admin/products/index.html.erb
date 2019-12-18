@@ -1,11 +1,64 @@
-商品一覧画面
-
-<% @products.each do |product| %>
-
-<%= product.id %>
-<%= product.product_name %>
-<%= product.price %>
-<%= product.genre.genre_name %>
-<%= product.sale_status %>
-
-<% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="row">
+        <div class="col-xs-1"> </div>
+        <div class="col-xs-10">
+          <nav>
+            <ul class="nav-list">
+              <% if user_signed_in? %>
+              <span class="margin-right"><%= link_to "マイページ", user_path(current_user) %></span>
+              <span class="margin-right"><%= link_to "カート", carts_path(current_user) %></span>
+              <span class="margin-right"><%= link_to "商品一覧", root_path %></span>
+              <span class="margin-right"><%= link_to "注文履歴", orders_path(current_user) %></span>
+              <% else %>
+              <% end %>
+            </ul>
+          </nav>
+        </div>
+        <div class="col-xs-1"> </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-1"> </div>
+        <div class="col-xs-10"> <span class="fontsize-cart">商品一覧画面</span>
+          <div style="text-align : right">
+            <%= link_to "商品の追加", new_admin_product_path, class: "btn btn-primary" %>
+          </div> <br><br>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <td>商品ID </td>
+                <td>商品名 </td>
+                <td>税抜き価格 </td>
+                <td>ジャンル </td>
+                <td>ステータス </td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <% @products.each do |product| %>
+                  <td>
+                    <%= product.id %>
+                  </td>
+                  <td>
+                    <%= product.product_name %>
+                  </td>
+                  <td>
+                    <%= product.price %>
+                  </td>
+                  <td>
+                    <%= product.genre.genre_name %>
+                  </td>
+                  <td>
+                    <%= product.sale_status %>
+                  </td>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col-xs-1"> </div>
+    </div>
+  </div>
+</div>

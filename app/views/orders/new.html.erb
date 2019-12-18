@@ -1,18 +1,43 @@
-<h3>購入情報入力</h3>
-<h3><strong>支払方法</strong></h3>
-<%= form_for(@order_product, {:url => orders_path}) do |f| %>
+<h2>購入情報入力</h2>
+<h3>支払方法</h3>
+<%= form_for(@order, {:url => check_orders_path}) do |f| %>
 <label>
-<%= f.radio_button :payment_method, "1" %> クレジットカード </label><br>
-<label><%= f.radio_button :payment_method, "2" %> 銀行振込</label>
-<% end %>
-<h3><strong>お届け先</strong></h3>
-<!-- ラジオボタンタグ？自分の、登録済の -->
-<%= form_for(@order, {:url => orders_path}) do |f| %>
+  <%= f.radio_button :payment_method, :クレジットカード %>クレジットカード
+</label>
+<br>
+<label>
+  <%= f.radio_button :payment_method, :銀行振込 %>銀行振込
+</label>
+<h3>
+  <strong>お届け先</strong>
+</h3>
+<label>
+  <%= radio_button_tag :add,  "my_addr" %>ご自身の住所
+</label>
+<br>
+<%= current_user.postcode %>
+<%= current_user.address %>
+<%= current_user.last_name %>
+<%= current_user.first_name %>
+<br>
+<label>
+  <%= radio_button_tag :add, "send_addr" %>登録済住所から選択
+</label>
+<br>
+<%= collection_select :send, :send_id, Send.all, :id, :to_address_name %>
+<br>
+<label>
+  <%= radio_button_tag :add, "mew_addr" %>新しいお届け先
+</label>
+<br>
 <strong>郵便番号</strong>
-<%= f.text_field :postcode %>ハイフンなし<br>
+<%= f.text_field :postcode %>ハイフンなし
+<br>
 <strong>住所</strong>
-<%= f.text_field :address %><br>
+<%= f.text_field :address %>
+<br>
 <strong>宛名</strong>
-<%= f.text_field :name %><br>
+<%= f.text_field :name %>
+<br>
 <%= f.submit "確認画面へ進む" %>
 <% end %>
