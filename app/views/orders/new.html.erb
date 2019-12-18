@@ -1,5 +1,7 @@
 <h2>購入情報入力</h2>
-<h3>支払方法</h3>
+<h3>
+  <strong>支払方法</strong>
+</h3>
 <%= form_for(@order, {:url => check_orders_path}) do |f| %>
 <label>
   <%= f.radio_button :payment_method, :クレジットカード %>クレジットカード
