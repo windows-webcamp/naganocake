@@ -1,16 +1,10 @@
 class Admin::AdminsController < ApplicationController
 	
 	def top
-		@order = Order.find(params[:id])
+		range = Date.today.beginning_of_day..Date.today.end_of_day
+		@orders =  Order.where(created_at: range)
 
 	end
-
-	private
-
-	def order_params
-		params.require(:order).permit(:order_id)
-	end
-
 end
 
 

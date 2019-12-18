@@ -2,8 +2,6 @@ class Admin::OrdersController < ApplicationController
 
 # 注文履歴表示
     def index
-    	# @orders = Order.page(params[:page]).reverse_order
-    	# @orders = Order.all
         @orders = Order.page(params[:page]).reverse_order
     end
 

@@ -4,14 +4,12 @@ class OrdersController < ApplicationController
 # 注文情報入力ページorder_productモデル
     def new
     	@order = Order.new
-      # @user = current_user
         @sends = Send.all
     end
 
 # 注文確認ページ
     def check
         @order = Order.new(order_params)
-        # @order = Order.new
         @carts = current_user.carts
 
         if params[:add] == "my_addr"
@@ -56,7 +54,6 @@ class OrdersController < ApplicationController
     def index
         @user = current_user
         @orders = @user.orders.order(created_at: :desc)
-        # @orders = Order.page(params[:page]).reverse_order
     end
 
 # 注文履歴詳細ページ

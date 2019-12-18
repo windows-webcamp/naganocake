@@ -15,6 +15,7 @@ Rails.application.routes.draw do
       end
     end
     resources :orders, only: [:index, :show, :update]
+    get 'top' => 'admins#top'
   end
 
 
@@ -30,7 +31,6 @@ Rails.application.routes.draw do
   delete '/carts_delete' => 'carts#carts_delete' ,as: 'carts_delete'
   resources :orders, only: [:new, :create, :index, :show] do
     collection do
-      # get 'check' => 'orders#check'
       post 'check'
       get 'finish'
     end
