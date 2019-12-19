@@ -1,7 +1,30 @@
-<h2>購入情報入力</h2>
-<h3>
-  <strong>支払方法</strong>
-</h3>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="row">
+        <div class="col-xs-1"> </div>
+        <div class="col-xs-10">
+          <nav>
+            <ul class="nav-list">
+              <% if user_signed_in? %>
+              <span class="margin-right"><%= link_to "マイページ", user_path(current_user) %></span>
+              <span class="margin-right"><%= link_to "カート", carts_path(current_user) %></span>
+              <span class="margin-right"><%= link_to "商品一覧", root_path %></span>
+              <span class="margin-right"><%= link_to "注文履歴", orders_path(current_user) %></span>
+              <% else %>
+              <% end %>
+            </ul>
+          </nav>
+        </div>
+        <div class="col-xs-1"> </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-1"> </div>
+        <div class="col-xs-10"> <span class="fontsize-cart">購入情報入力
+</span>
+
+<h3><strong>支払方法</strong></h3>
+
 <%= form_for(@order, {:url => check_orders_path}) do |f| %>
 <label>
   <%= f.radio_button :payment_method, :クレジットカード, required: true %>クレジットカード
@@ -21,25 +44,34 @@
 <%= current_user.address %>
 <%= current_user.last_name %>
 <%= current_user.first_name %>
-<br>
+<br><br>
 <label>
   <%= radio_button_tag :add, "send_addr" %>登録済住所から選択
 </label>
 <br>
 <%= collection_select :send, :send_id, Send.all, :id, :to_address_name %>
-<br>
+<br><br>
 <label>
   <%= radio_button_tag :add, "mew_addr" %>新しいお届け先
 </label>
 <br>
 <strong>郵便番号</strong>
-<%= f.text_field :postcode %>ハイフンなし
+<%= f.text_field :postcode, class:"form-control" ,placeholder: "ハイフン入れてね", :style=> "width:30%;" %>
 <br>
 <strong>住所</strong>
-<%= f.text_field :address %>
+<%= f.text_field :address, class:"form-control", :style=> "width:30%;" %>
 <br>
 <strong>宛名</strong>
-<%= f.text_field :name %>
+<%= f.text_field :name, class:"form-control", :style=> "width:30%;" %>
 <br>
-<%= f.submit "確認画面へ進む" %>
+<%= f.submit "確認画面へ進む", class: "btn btn-primary" %>
 <% end %>
+
+
+</div>
+        </div>
+        <div class="col-xs-1"> </div>
+      </div>
+    </div>
+  </div>
+</div><br>

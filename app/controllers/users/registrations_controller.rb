@@ -12,7 +12,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
   #GET /resource/edit
   def edit
-    @user = User.with_deleted.first
+    #@user = current_user
   end
   # PUT /resource
   def after_update_path_for(resource)
@@ -20,6 +20,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
   #DELETE /resource
   def destroy
+    sign_out(resource_name)
+    redirect_to root_path
    # super
   end
   # GET /resource/cancel

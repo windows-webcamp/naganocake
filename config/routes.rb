@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   }
   root 'products#index'
   get '/products/:genre_id/genre', to:'products#index', as: 'genres'
-  resources :users, only: [:show, :destroy]
+  resources :users, only: [:show]
   resources :products, only: [:index, :show]
   resources :carts, only: [:create, :index, :destroy, :update]
   delete '/carts_delete' => 'carts#carts_delete' ,as: 'carts_delete'

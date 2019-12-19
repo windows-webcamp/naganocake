@@ -6,11 +6,11 @@
         <div class="col-xs-10">
           <nav>
             <ul class="nav-list">
-              <% if user_signed_in? %>
-              <span class="margin-right"><%= link_to "マイページ", user_path(current_user) %></span>
-              <span class="margin-right"><%= link_to "カート", carts_path(current_user) %></span>
-              <span class="margin-right"><%= link_to "商品一覧", root_path %></span>
-              <span class="margin-right"><%= link_to "注文履歴", orders_path(current_user) %></span>
+              <% if admin_signed_in? %>
+              <span class="margin-right"><%= link_to "商品一覧", admin_products_path %></span>
+              <span class="margin-right"><%= link_to "会員一覧", admin_users_path %></span>
+              <span class="margin-right"><%= link_to "注文履歴一覧", admin_orders_path %></span>
+              <span class="margin-right"><%= link_to "ジャンル管理", admin_genres_path %></span>
               <% else %>
               <% end %>
             </ul>
@@ -34,7 +34,7 @@
   <% else %>
   <%= "退会済" %>
   <% end %>
-  
+
   <tr>
    <th><%= "氏名" %></th>
   <td><%= @user.last_name %><%= @user.first_name %></td>

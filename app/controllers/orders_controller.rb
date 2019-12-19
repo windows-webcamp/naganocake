@@ -1,6 +1,5 @@
 class OrdersController < ApplicationController
-
-    before_action :authenticate_user!
+  before_action :authenticate_user!
 
 # 注文情報入力ページorder_productモデル
     def new

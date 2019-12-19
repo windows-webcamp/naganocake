@@ -1,4 +1,28 @@
-<h2>注文情報確認</h2>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="row">
+        <div class="col-xs-1"> </div>
+        <div class="col-xs-10">
+          <nav>
+            <ul class="nav-list">
+              <% if user_signed_in? %>
+              <span class="margin-right"><%= link_to "マイページ", user_path(current_user) %></span>
+              <span class="margin-right"><%= link_to "カート", carts_path(current_user) %></span>
+              <span class="margin-right"><%= link_to "商品一覧", root_path %></span>
+              <span class="margin-right"><%= link_to "注文履歴", orders_path(current_user) %></span>
+              <% else %>
+              <% end %>
+            </ul>
+          </nav>
+        </div>
+        <div class="col-xs-1"> </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-1"> </div>
+        <div class="col-xs-10"> <span class="fontsize-cart">注文情報確認
+</span>
+<br>
 <% total = 0 %>
 <table class="table table-hover table-inverse">
   <thead>
@@ -7,14 +31,14 @@
       <th>単価(税込)</th>
       <th>数量</th>
       <th>小計</th>　　
-    </tr>　　 
+    </tr>
   </thead>
   <% @carts.each do |cart| %>
   <tbody>
     <tr>
       <td>
         <!-- current_userカートから写真、名前 -->
-        <%= attachment_image_tag cart.product, :product_image, :fill, 60, 60, class: "img-circle pull-left profile-thumb", fallback: "no_image.jpg" %>
+        <%= attachment_image_tag cart.product, :product_image, format: 'jpeg', fallback: "no_image.jpg", size: "100x75" %>
         <%= cart.product.product_name %>
       </td>
       <td>
@@ -35,28 +59,27 @@
   <% end %>
 </table>
 <%= form_for(@order) do |f| %>
-<table class="table table-bordered">
+<table class="table table-bordered right" style = "width:30%!important" >
   <tr>
-    <th>送料</th>
-    <td>
-      <%= @order.delivery_cost %>
-    </td>
+    <th style = "width:40%!important">送料</th>
+    <td style = "width:60%!important"><%= @order.delivery_cost %>円</td>
   </tr>
   <tr>
     <th>商品合計</th>
     <!-- order_product subtotalの合計 -->
     <td>
-      <%= total %>
+      <%= total %>円
     </td>
   </tr>
   <tr>
     <th>請求合計</th>
     <!-- 送料＋商品合計 -->
     <td>
-      <%= @order.delivery_cost + total %>
+      <%= @order.delivery_cost + total %>円
     </td>
   </tr>
 </table>
+
 <h3>支払方法</h3>
 <%= f.hidden_field :payment_method, value:@order.payment_method %>
 <%= @order.payment_method %>
@@ -72,5 +95,15 @@
 <%= f.hidden_field :total_price, value:800+total %>
 <%= f.hidden_field :delivery_cost, value:800 %>
 <%= f.hidden_field :order_status, value: :入金待ち %>
-<%= f.submit "購入を確定する" %>
+<br>
+<%= f.submit "購入を確定する", class: "btn btn-primary" %>
 <% end %>
+
+
+</div>
+        </div>
+        <div class="col-xs-1"> </div>
+      </div>
+    </div>
+  </div>
+</div><br>
