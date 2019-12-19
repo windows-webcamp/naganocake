@@ -1,6 +1,32 @@
-<h2>管理者</h2>
-<p>
-	本日の注文件数
-</p>
-<%= link_to @orders.count, admin_orders_path %>
-<p>件</p>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="row">
+        <div class="col-xs-1"> </div>
+        <div class="col-xs-10">
+          <nav>
+            <ul class="nav-list">
+              <% if admin_signed_in? %>
+              <span class="margin-right"><%= link_to "商品一覧", admin_products_path %></span>
+              <span class="margin-right"><%= link_to "会員一覧", admin_users_path %></span>
+              <span class="margin-right"><%= link_to "注文履歴一覧", admin_orders_path %></span>
+              <span class="margin-right"><%= link_to "ジャンル管理", admin_genres_path %></span>
+              <% else %>
+              <% end %>
+            </ul>
+          </nav>
+        </div>
+        <div class="col-xs-1"> </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-1"> </div>
+        <div class="col-xs-6">
+        	<br><br>
+<span class="fontsize-cart">本日の注文件数　</span>
+<span class="fontsize-cart"><%= link_to @orders.count, admin_orders_path %>件</span>
+      </div>
+        <div class="col-xs-4"> </div>
+      </div>
+    </div>
+  </div>
+</div>

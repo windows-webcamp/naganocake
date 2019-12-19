@@ -3,10 +3,13 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  acts_as_paranoid without_default_scope: true
+  acts_as_paranoid
   has_many :orders
   has_many :sends
   has_many :carts
+
+
+
   def update_without_current_password(params, *options)
   	params.delete(:current_password)
   	if params[:password].blank? && params[:password_confirmation].blank?

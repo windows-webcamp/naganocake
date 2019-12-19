@@ -7,7 +7,7 @@ class CreateSends < ActiveRecord::Migration[5.2]
       t.string :name, null: false
       t.string :postcode, null: false
       t.string :address, null: false
-      t.datetime :deleted_at, default: false
+      t.datetime :deleted_at
     end
   end
 end

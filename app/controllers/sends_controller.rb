@@ -1,7 +1,8 @@
 class SendsController < ApplicationController
+	before_action :authenticate_user!
 	def index
 		@send = Send.new
-		@sends = Send.all
+		@sends = current_user.sends
 	end
 	def create
 		@send = Send.new(send_params)
