@@ -20,6 +20,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
   #DELETE /resource
   def destroy
+    @user = current_user
+    @user.destroy
     sign_out(resource_name)
     redirect_to root_path
    # super

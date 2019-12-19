@@ -8,7 +8,7 @@ class Admin::UsersController < ApplicationController
 	end
 	def show
 		@user = User.find(params[:id])
-		@users = User.with_deleted.first
+		@users = User.with_deleted
 	end
 	def update
 		@user = User.find(params[:id])

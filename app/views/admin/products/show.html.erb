@@ -41,6 +41,8 @@
           </p> <br> <br>
           <p>販売ステータス </p>
           <%= @product.sale_status %>
+          <br><br>
+          <%= link_to "編集する", edit_admin_product_path(@product), data: {"turbolinks" => false} , class: "btn btn-primary" %>
         </div>
       </div>
     </div>

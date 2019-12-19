@@ -48,7 +48,9 @@
                 <tr>
                   <% @products.each do |product| %>
                     <td class="width">
+                      <%= link_to product_path(product) do %>
                       <%= attachment_image_tag product, :product_image, format: 'jpeg', fallback: "no_image.jpg", size: "450x300" %>
+                      <% end %>
                     </td>
                     <td valign="middle">
                       <p class="fontsize">
