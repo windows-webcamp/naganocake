@@ -8,7 +8,7 @@ class SendsController < ApplicationController
 		@send = Send.new(send_params)
 		@send.user_id = current_user.id
 		if @send.save
-			redirect_to user_path(current_user)
+			redirect_to sends_path(current_user)
 		else
 			render :index
 		end
