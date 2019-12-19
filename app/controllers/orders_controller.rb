@@ -1,13 +1,12 @@
 class OrdersController < ApplicationController
 
-    # before_action :authenticate_user!
+    before_action :authenticate_user!
 
 # 注文情報入力ページorder_productモデル
     def new
         @order = Order.new
         @sends = Send.all
     end
-
 # 注文確認ページ
     def check
         @order = Order.new(order_params)
@@ -18,7 +17,6 @@ class OrdersController < ApplicationController
             @order.name = current_user.last_name + current_user.first_name
         elsif params[:add] == "send_addr"
             @send = Send.find(params[:send][:send_id])
-            pp @send
             @order.postcode = @send.postcode
             @order.address = @send.address
             @order.name = @send.name
