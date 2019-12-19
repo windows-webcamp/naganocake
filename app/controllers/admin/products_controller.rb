@@ -33,5 +33,4 @@ private
     def product_params
         params.require(:product).permit(:product_name, :price, :product_image, :product_intoroduction, :genre_id, :sale_status)
     end
-
 end

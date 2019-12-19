@@ -24,19 +24,20 @@
 </span>
 
 <h3><strong>支払方法</strong></h3>
+
 <%= form_for(@order, {:url => check_orders_path}) do |f| %>
 <label>
-  <%= f.radio_button :payment_method, :クレジットカード %>クレジットカード
+  <%= f.radio_button :payment_method, :クレジットカード, required: true %>クレジットカード
 </label>
 <br>
 <label>
-  <%= f.radio_button :payment_method, :銀行振込 %>銀行振込
+  <%= f.radio_button :payment_method, :銀行振込, required: true %>銀行振込
 </label>
 <h3>
   <strong>お届け先</strong>
 </h3>
 <label>
-  <%= radio_button_tag :add,  "my_addr" %>ご自身の住所
+  <%= radio_button_tag :add,  "my_addr", required: true %>ご自身の住所
 </label>
 <br>
 <%= current_user.postcode %>

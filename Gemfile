@@ -70,3 +70,4 @@ gem 'jquery-rails'
 gem 'paranoia', '~> 2.2'
 gem 'pry-rails'
 gem 'pry-byebug'
+

@@ -9,9 +9,9 @@ Rails.application.routes.draw do
     resources :users, only: [:index, :show, :edit, :update, :destroy]
     resources :products, only: [:new, :create, :index, :show, :edit, :update, :delete]
     resources :genres, only: [:index, :create, :update, :destroy, :edit] do
-    member do
-    patch 'genre_restore'
-    end
+      member do
+        patch 'genre_restore'
+      end
     end
     resources :orders, only: [:index, :show, :update]
     get 'top' => 'admins#top'
@@ -28,7 +28,6 @@ Rails.application.routes.draw do
   resources :users, only: [:show]
   resources :products, only: [:index, :show]
   resources :carts, only: [:create, :index, :destroy, :update]
-
   delete '/carts_delete' => 'carts#carts_delete' ,as: 'carts_delete'
 
   resources :orders, only: [:new, :create, :index, :show] do
