@@ -1,29 +1,88 @@
-ショッピングカート
-<% total = 0 %>
-<% @carts.each do |cart| %>
-
-<%= attachment_image_tag cart.product, :product_image, format: 'jpeg', fallback: "no_image.jpg", size: "100x100" %>
-
-<!-- 商品名 -->
-<div><%= cart.product.product_name %></div>
-
-<!-- 商品金額 -->
-<div><%= cart.product.price %></div>
-
-<!-- 商品数 -->
-<%= form_for(cart) do |f| %>
-<%= f.text_field :number, autofocus: true, id:"inputnumber" %>
-<%= f.submit "合計金額再計算" %>
-<% end %>
-
-<!-- 小計 -->
-<%= cart.product.price * cart.number %>
-<% total += cart.product.price * cart.number %>
-
-<%= link_to "削除", cart_path(cart), method: :delete, "data-confirm" => "本当に消しますか？", class: "btn btn-danger" %>
-<% end %>
-
-<!-- 合計金額 -->
-<%= total %>
-
-<%= link_to "カート内削除", carts_delete_path, method: :delete, "data-confirm" => "本当に消しますか？", class: "btn btn-danger" %>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="row">
+        <div class="col-xs-1"> </div>
+        <div class="col-xs-10">
+          <nav>
+            <ul class="nav-list">
+              <% if user_signed_in? %>
+              <span class="margin-right"><%= link_to "マイページ", user_path(current_user) %></span>
+              <span class="margin-right"><%= link_to "カート", carts_path(current_user) %></span>
+              <span class="margin-right"><%= link_to "商品一覧", root_path %></span>
+              <span class="margin-right"><%= link_to "注文履歴", orders_path(current_user) %></span>
+              <% else %>
+              <% end %>
+            </ul>
+          </nav>
+        </div>
+        <div class="col-xs-1"> </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-1"> </div>
+        <div class="col-xs-10"> <span class="fontsize-cart">ショッピングカート
+</span>
+          <div style="text-align : right">
+            <%= link_to "カートを空にする", carts_delete_path, method: :delete, "data-confirm" => "本当に消しますか？", class: "btn btn-danger" %>
+          </div>
+          <% total = 0 %>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <td>商品名 </td>
+                  <td>単価（税込み）</td>
+                  <td>数量 </td>
+                  <td>小計（税込み）</td>
+                  <td> </td>
+                </tr>
+              </thead>
+              <tbody>
+                <% @carts.each do |cart| %>
+                  <tr>
+                    <td>
+                      <%= attachment_image_tag cart.product, :product_image, format: 'jpeg', fallback: "no_image.jpg", size: "150x100" %>
+                        <!-- 商品名 -->
+                        <%= cart.product.product_name %>
+                    </td>
+                    <td valign="middle">
+                      <!-- 商品金額 -->
+                      <div>
+                        <%= (cart.product.price * 1.1).round %>円
+                      </div>
+                    </td>
+                    <td valign="middle">
+                      <!-- 商品数 -->
+                      <%= form_for(cart) do |f| %>
+                        <%= f.text_field :number, autofocus: true, id:"inputnumber", :size => "5px" %>
+                          <%= f.submit "再計算", class: "btn btn-primary" %>
+                            <% end %>
+                    </td>
+                    <td>
+                      <!-- 小計 -->
+                      <%= (cart.product.price * cart.number* 1.1).round %>円
+                        <% total += cart.product.price * cart.number %>
+                    </td>
+                    <td>
+                      <%= link_to "削除", cart_path(cart), method: :delete, "data-confirm" => "本当に消しますか？", class: "btn btn-danger" %>
+                    </td>
+                    <% end %>
+                  </tr>
+              </tbody>
+            </table>
+            <!-- 合計金額 -->
+            <%= link_to "買い物を続ける", root_path, class: "btn btn-primary" %>
+              <table class="right" border="1" bgcolor="#ffcc99">
+                <tr>
+                  <td width="100" height="70">合計金額 </td>
+                  <td width="100" height="70">
+                    <%= (total* 1.1).round %>円 </td>
+                </tr>
+              </table>
+              <div style="text-align : center">
+                <%= link_to "情報入力に進む", new_order_path, class: "btn btn-primary", :style=> "width:40%;" %> <br><br> </div>
+        </div>
+        <div class="col-xs-1"> </div>
+      </div>
+    </div>
+  </div>
+</div><br>

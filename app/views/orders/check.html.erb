@@ -1,0 +1,76 @@
+<h2>注文情報確認</h2>
+<% total = 0 %>
+<table class="table table-hover table-inverse">
+  <thead>
+    <tr>
+      <th>商品名</th>
+      <th>単価(税込)</th>
+      <th>数量</th>
+      <th>小計</th>　　
+    </tr>　　 
+  </thead>
+  <% @carts.each do |cart| %>
+  <tbody>
+    <tr>
+      <td>
+        <!-- current_userカートから写真、名前 -->
+        <%= attachment_image_tag cart.product, :product_image, :fill, 60, 60, class: "img-circle pull-left profile-thumb", fallback: "no_image.jpg" %>
+        <%= cart.product.product_name %>
+      </td>
+      <td>
+        <!-- current_userカートから単価 -->
+        <%= (cart.product.price*1.1).round %>
+      </td>
+      <td>
+        <!-- current_user数量 -->
+        <%= cart.number %>
+      </td>
+      <td>
+        <!-- current_userカートから小計　-->
+        <%= (cart.product.price*1.1).round*cart.number %>
+        <% total += (cart.product.price*1.1).round*cart.number %>
+      </td>
+    </tr>
+  </tbody>
+  <% end %>
+</table>
+<%= form_for(@order) do |f| %>
+<table class="table table-bordered">
+  <tr>
+    <th>送料</th>
+    <td>
+      <%= @order.delivery_cost %>
+    </td>
+  </tr>
+  <tr>
+    <th>商品合計</th>
+    <!-- order_product subtotalの合計 -->
+    <td>
+      <%= total %>
+    </td>
+  </tr>
+  <tr>
+    <th>請求合計</th>
+    <!-- 送料＋商品合計 -->
+    <td>
+      <%= @order.delivery_cost + total %>
+    </td>
+  </tr>
+</table>
+<h3>支払方法</h3>
+<%= f.hidden_field :payment_method, value:@order.payment_method %>
+<%= @order.payment_method %>
+<h3>お届け先</h3>
+<%= f.hidden_field :postcode, value:@order.postcode %>
+<%= @order.postcode %>
+<%= f.hidden_field :address, value:@order.address %>
+<%=  @order.address %>
+<br>
+<%= f.hidden_field :name, value:@order.name %>
+<%= @order.name %>
+<br>
+<%= f.hidden_field :total_price, value:800+total %>
+<%= f.hidden_field :delivery_cost, value:800 %>
+<%= f.hidden_field :order_status, value: :入金待ち %>
+<%= f.submit "購入を確定する" %>
+<% end %>

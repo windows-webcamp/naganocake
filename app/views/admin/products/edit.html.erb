@@ -1,24 +1,47 @@
-商品編集画面
-
-<%= form_for(@product, {:url => admin_product_path}) do |f| %>
-
-<p>商品画像</p>
-<%= attachment_image_tag @product, :product_image, format: 'jpeg', fallback: "no_image.jpg", size: "100x100" %>
-<%= f.attachment_field :product_image %>
-
-<p>商品名</p>
-<%= f.text_field :product_name, autofocus: true, class:"form-control", id:"inputproductname" %>
-
-<p>商品説明文</p>
-<%= f.text_area :product_intoroduction, autofocus: true, class:"form-control", id:"inputproductintoroduction" %>
-
-<p>税抜き価格</p>
-<%= f.text_field :price, autofocus: true, class:"form-control", id:"inputprice" %>
-
-<%= f.collection_select :genre_id, Genre.all, :id, :genre_name %>
-
-<%= f.select :sale_status, Product.sale_statuses.keys.to_a, {} %>
-
-<%= f.submit "変更を保存" %>
-
-<% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="row">
+        <div class="col-xs-1"> </div>
+        <div class="col-xs-10">
+          <nav>
+            <ul class="nav-list">
+              <% if user_signed_in? %>
+              <span class="margin-right"><%= link_to "マイページ", user_path(current_user) %></span>
+              <span class="margin-right"><%= link_to "カート", carts_path(current_user) %></span>
+              <span class="margin-right"><%= link_to "商品一覧", root_path %></span>
+              <span class="margin-right"><%= link_to "注文履歴", orders_path(current_user) %></span>
+              <% else %>
+              <% end %>
+            </ul>
+          </nav>
+        </div>
+        <div class="col-xs-1"> </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-1"> </div>
+        <div class="col-xs-5"> <span class="fontsize-cart">商品編集画面
+</span> <br><br>
+          <%= form_for(@product, {:url => admin_product_path}) do |f| %>
+            <p>商品画像</p>
+            <%= attachment_image_tag @product, :product_image, format: 'jpeg', fallback: "no_image.jpg", size: "400x250" %> <br><br>
+              <%= f.attachment_field :product_image %>
+        </div>
+        <div class="col-xs-6"> <br><br><br>
+          <p>商品名</p>
+          <%= f.text_field :product_name, autofocus: true, class:"form-control", id:"inputproductname" %> <br>
+            <p>商品説明文</p>
+            <%= f.text_area :product_intoroduction, autofocus: true, class:"form-control", id:"inputproductintoroduction" %> <br>
+              <p>税抜き価格</p>
+              <%= f.text_field :price, autofocus: true, class:"form-control", id:"inputprice" %> <br>
+                <p>ジャンル選択</p>
+                <%= f.collection_select :genre_id, Genre.all, :id, :genre_name %> <br><br>
+                  <p>ステータス選択</p>
+                  <%= f.select :sale_status, Product.sale_statuses.keys.to_a, {} %> <br><br>
+                    <%= f.submit "変更を保存", class: "btn btn-primary", :style=> "width:40%;" %>
+                      <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
