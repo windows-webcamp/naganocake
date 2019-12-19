@@ -1,24 +1,20 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+【アプリケーション名】
+ながのCAKE
 
-Things you may want to cover:
+【概要】
+ケーキ専門店のECサイト
 
-* Ruby version
+【詳細】
+購入者は、商品閲覧、購入、注文履歴閲までできる。
+管理者側は、商品追加、会員編集・退会まで、一連の操作が可能。
 
-* System dependencies
+【使用言語】
+Ruby
 
-* Configuration
+【実装した機能】
+GEM：paranoia, Bootstrap, devise, refile, kaminari, pry-byebug
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+【作成者】
+宇野博之、木村智史、石川大輔
