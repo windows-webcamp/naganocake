@@ -1,4 +1,5 @@
 class Admin::OrdersController < ApplicationController
+    before_action :authenticate_admin!
 # 注文履歴表示
     def index
         @orders = Order.page(params[:page]).reverse_order
